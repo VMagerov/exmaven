@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>exmaven</groupId>
+  <artifactId>exmaven</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>rest</module>
+    <module>test</module>
+  </modules>
+  <properties>
+    <spring.version>4.3.18.RELEASE</spring.version>
+    <jstl.version>1.2</jstl.version>
+    <lombok.version>1.18.10</lombok.version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+  </dependencies>
+
+    <profiles>
+      <profile>
+        <id>default</id>
+        <activation>
+          <activeByDefault>true</activeByDefault>
+        </activation>
+      </profile>
+      <profile>
+        <id>first</id>
+        <activation>
+          <property>
+            <name>lombok</name>
+            <value>1.18.10</value>
+          </property>
+        </activation>
+      </profile>
+      <profile>
+        <id>second</id>
+        <activation>
+          <property>
+            <name>lombok</name>
+            <value>1.18.8</value>
+          </property>
+        </activation>
+      </profile>
+    </profiles>
+
+  <build>
+    <finalName>testMaven</finalName>
+    <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+    <testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+          <warSourceDirectory>${basedir}/web</warSourceDirectory>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
